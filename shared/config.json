@@ -1,0 +1,4 @@
+{
+	"MySQL": "oxmysql", // oxmysql, mysql-async, ghmattimysql
+	"Framework": "QB"
+}

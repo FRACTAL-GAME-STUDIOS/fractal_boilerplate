@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "strict": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "CommonJS",
+    "types": ["@citizenfx/client", "@types/node", "webpack-env"],
+    "lib": ["ES2020"],
+    "baseUrl": "../",
+  },
+  "include": ["./**/*", "../core/qb/interfaces/QB.interface.ts", "../core/esx/interfaces/ESX.interface.ts", "../shared", "../core/qb/**/*", "../core/esx/**/*"],
+  "exclude": ["**/node_modules", "**/__tests__/*"]
+}
