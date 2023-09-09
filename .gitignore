@@ -125,3 +125,16 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+# ==================== BUILDS OUTPUT ====================
+# client 
+client/
+
+# server
+server/
+
+# NUI 
+web/
+
+# ==================== END BUILDS OUTPUT ====================
