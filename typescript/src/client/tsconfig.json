@@ -10,6 +10,6 @@
     "lib": ["ES2020"],
     "baseUrl": "../",
   },
-  "include": ["./**/*", "../core/qb/interfaces/QB.interface.ts", "../core/esx/interfaces/ESX.interface.ts", "../shared", "../core/qb/**/*", "../core/esx/**/*"],
+  "include": ["./**/*", "../core/qb/interfaces/QB.interface.ts", "../core/interfaces/ESX.interface.ts", "../shared", "../core/qb/**/*", "../core/esx/**/*", "../core/Framework/sv_bridge.ts"],
   "exclude": ["**/node_modules", "**/__tests__/*"]
 }
