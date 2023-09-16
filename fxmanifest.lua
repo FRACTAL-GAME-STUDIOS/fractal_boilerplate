@@ -2,8 +2,6 @@ fx_version 'cerulean'
 game 'gta5'
 lua54 'yes'
 
-author 'Mercy Collective'
-description 'TS Boilerplate'
 
 client_scripts {
     'client/*.js',
@@ -11,4 +9,10 @@ client_scripts {
 
 server_scripts {
     'server/*.js',
+}
+
+ui_page "dist/web/index.html"
+files {
+	"dist/web/index.html",
+	"dist/web/**/*",
 }

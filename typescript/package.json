@@ -4,14 +4,22 @@
 	"description": "A boilerplate for TypeScript in FiveM",
 	"main": "index.js",
 	"scripts": {
-		"build": "cd ./src/web && ng build && cd ../../ && webpack --mode production",
-		"watch": "webpack --watch --mode development"
+		"build:all": "cd ./src/web && ng build && cd ../../ && webpack --mode production",
+		"build:web": "cd ./src/web && ng build",
+		"build:ts": "webpack --mode production",
+		"watch:all": "cd ./src/web && ng build --watch && cd ../../ && webpack --watch --mode development",
+		"watch:web": "cd ./src/web && ng build --watch",
+		"watch:ts": "webpack --watch --mode development",
+		"build": "npm run build:all",
+		"watch": "npm run build:watch"
 	},
 	"author": "Fractal Game Studios",
 	"license": "MIT",
 	"dependencies": {
+		"@overextended/oxmysql": "^1.3.0",
 		"@zerio2/qbcore.js": "^1.5.4",
 		"browserify-fs": "^1.0.0",
+		"cfx-server": "^1.1.5",
 		"esx": "^2.3.3",
 		"fivem-esx-js": "^0.1.17",
 		"fs": "0.0.1-security",

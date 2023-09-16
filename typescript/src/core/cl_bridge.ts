@@ -18,7 +18,7 @@ export const Init = async () => {
 };
 
 function InitESX(): any {
-	console.log('Se ha detectado como Framework activo: ESX, cargando funciones de ESX.')
+	console.log('InitESX - Se ha detectado como Framework activo: ESX, cargando funciones de ESX.')
 
 	selectedFramework = 'ESX';
 	let PlayerLoaded: boolean;
@@ -37,7 +37,7 @@ function InitESX(): any {
 	});
 
 	on('esx:onPlayerSpawn', (data: any) => {
-
+		
 	});
 
 	on('esx:onPlayerDeath', (data: any) => {
@@ -51,10 +51,6 @@ function InitESX(): any {
 	on('esx:setJob', (data: any) => {
 
 	});
-
-	const TriggerServerCallback = (name: string, cb: Function, ...args: any[]) => {
-		return ESX.TriggerServerCallback(name, cb, ...args);
-	}
 }
 
 function InitQB(): any {
@@ -74,3 +70,14 @@ export function TriggerServerCallback(arg0: string, arg1: (skills: any) => void)
 	}
 }
 
+export function GetPlayerData() {
+	switch (selectedFramework) {
+		case 'ESX':
+			return ESX.GetPlayerData();
+		case 'QB':
+			break;
+		default:
+			console.error('No se han inicializado los frameworks o posible uso en STANDALONE');
+			break;
+	}
+}

@@ -1,36 +1,43 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { NUIService } from './services/nui.service';
+import { Component, HostListener, OnInit } from "@angular/core";
+import { NuiService } from "./nui.service";
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	selector: "app-root",
+	templateUrl: "./app.component.html",
+	styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
-	title = 'Fractal Game Studios - ' + (window as any).GetParentResourceName(); // Get the resource name from the server
-
+export class AppComponent implements OnInit {
 	visible: boolean = false;
-	constructor(private NUI: NUIService) {}
+
+	constructor(private nui: NuiService) {}
 
 	ngOnInit(): void {
-		this.NUI.fromMessageAction<boolean>('setVisible').subscribe((visible: boolean) => {
-			next: (value: boolean) => {
+		this.nui.fromMessageAction("consoleAngular").subscribe({
+			next: (value) => {
+				console.log("value", value);
+			}
+		});
+
+		// This listens for the "setVisible" message
+		this.nui.fromMessageAction<boolean>("setVisible").subscribe({
+			next: (value) => {
 				this.visible = value;
 			}
 		});
 
-		this.NUI.dispatchDebugMessages([
+		// This will set the NUI to visible if we are developing in browser
+		this.nui.dispatchDebugMessages([
 			{
-				action: 'setVisible',
+				action: "setVisible",
 				data: true
 			}
 		]);
 	}
 
-	@HostListener('document:keydown.escape', ['$event'])
+	@HostListener("window:keydown", ["$event"])
 	handleKeyboardEvent(event: KeyboardEvent) {
-		if (['Backspace', 'Escape'].includes(event.code)) {
-			if (!this.NUI.isEnvBrowser()) this.NUI.fetchNUI('hideFrame');
+		if (["Backspace", "Escape"].includes(event.code)) {
+			if (!this.nui.isEnvBrowser()) this.nui.fetchNui("hideFrame");
 			this.visible = false;
 		}
 	}

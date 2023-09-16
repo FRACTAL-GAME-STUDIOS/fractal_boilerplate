@@ -1,22 +1,24 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { HttpClientModule } from "@angular/common/http";
 
-//import { AppRoutingModule } from './app-routing.module'; // Enable this if you want to use Angular routing in your app
-import { AppComponent } from './app.component';
-
-/* ======================== CUSTOM COMPONENTS ======================= */
-//import { ExampleComponent } from './components/example/example.component';
+import { AppComponent } from "./app.component";
+import { ExampleContainerComponent } from "./example-container/example-container.component";
+import { NuiService } from "./nui.service";
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		//ExampleComponent
+		ExampleContainerComponent,
+
 	],
 	imports: [
 		BrowserModule,
-		//AppRoutingModule // Enable this if you want to use Angular routing in your app
+		HttpClientModule,
 	],
-	providers: [],
-	bootstrap: [AppComponent]
+	providers: [
+		NuiService,
+	],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,8 +1,10 @@
+import * as cfxServer from 'cfx-server';
 import { ESXServer } from "fivem-esx-js/server/esx_server";
+import { ESXPlayer } from "fivem-esx-js/server/esx_xplayer";
 
 let selectedFramework: string;
 export let ESX: ESXServer;
-emit('esx:getSharedObject', (obj) => {
+emit('esx:getSharedObject', (obj: ESXServer) => {
     ESX = obj;
 });
 
@@ -41,7 +43,9 @@ export function KickPlayer(source: number, reason: string) {
 	switch (selectedFramework) {
 		case 'ESX':
 			let player = GetPlayer(source);
-			return player.kick(reason);
+			if (player) {
+				player.kick(reason);
+			}
 		case 'QB':
 			break;
 		default:
@@ -124,11 +128,13 @@ export function HasItem(source: number, search: string) {
 	switch (selectedFramework) {
 		case 'ESX':
 			let player = GetPlayer(source);
-			let item = player.getInventoryItem(search);
-			if (item) {
-				return item.count;
-			} else {
-				return 0;
+			if (player) {
+				let item = player.getInventoryItem(search);
+				if (item) {
+					return item.count;
+				} else {
+					return 0;
+				}
 			}
 			break;
 		case 'QB':
@@ -142,8 +148,10 @@ export function AddItem(source: number, item: string, count: number, slot: any, 
 	switch (selectedFramework) {
 		case 'ESX':
 			let player = GetPlayer(source);
-			// @ts-ignore
-			player.addInventoryItem(item, count, metadata, slot);
+			if (player) {
+				// @ts-ignore
+				player.addInventoryItem(item, count, metadata, slot);
+			}
 			break;
 		case 'QB':
 			break;
@@ -156,8 +164,10 @@ export function RemoveItem(source: number, item: string, count: number, slot: an
 	switch (selectedFramework) {
 		case 'ESX':
 			let player = GetPlayer(source);
-			// @ts-ignore
-			player.removeInventoryItem(item, count, metadata, slot);
+			if (player) {
+				// @ts-ignore
+				player.removeInventoryItem(item, count, metadata, slot);
+			}
 			break;
 		case 'QB':
 			break;
@@ -171,8 +181,9 @@ export function AddMoney(source: number, type: string, amount: number) {
 		case 'ESX':
 			if (type == 'cash') type = 'money';
 			let player = GetPlayer(source);
-			player.addAccountMoney(type, amount);
-
+			if (player) {
+				player.addAccountMoney(type, amount);
+			}
 			break;
 		case 'QB':
 			break;
@@ -186,8 +197,10 @@ export function RemoveMoney(source: number, type: string, amount: number) {
 		case 'ESX':
 			if (type == 'cash') type = 'money';
 			let player = GetPlayer(source);
-			player.removeAccountMoney(type, amount);
 
+			if (player) {
+				player.removeAccountMoney(type, amount);
+			}
 			break;
 		case 'QB':
 			break;
@@ -201,8 +214,11 @@ export function GetMoney(source: number, type: string) {
 		case 'ESX':
 			if (type == 'cash') type = 'money';
 			let player = GetPlayer(source);
-			return player.getAccount(type);
-
+			if (player) {
+				return player.getAccount(type);
+			} else {
+				return 0;
+			}
 			break;
 		case 'QB':
 			break;
@@ -215,7 +231,6 @@ export function RegisterServerCallback(name: string, cb: Function) {
 	switch (selectedFramework) {
 		case 'ESX':
 			ESX.RegisterServerCallback(name, cb);
-
 			break;
 		case 'QB':
 			break;

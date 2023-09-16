@@ -1,30 +1,16 @@
-export const ExecuteSQL = (sql: string) => {
-	let IsBusy = true;
-	let result = null;
+import { oxmysql as MySQL } from "@overextended/oxmysql";
 
-	let Config = LoadResourceFile(GetCurrentResourceName(), "shared/config.json") || "{}";
-
-	if (Config["MySQL"] == "oxmysql") {
-		exports.oxmysql.execute(sql, [], (data: any) => {
-			result = data;
-			IsBusy = false;
-		});
-	} else if (Config["MySQL"] == "mysql-async") {
-		// @ts-ignore
-		MySQL.Async.fetchAll(sql, [], (data: any) => {
-			result = data;
-			IsBusy = false;
-		});
-	} else if (Config["MySQL"] == "ghmattimysql") {
-		exports.ghmattimysql.execute(sql, (data: any) => {
-			result = data;
-			IsBusy = false;
-		});
-	}
-	while (IsBusy) {
-		setTimeout(() => {}, 1);
-	}
-	return result;
-}
-	
-
+export const Scalar = async (sql: string, params?: any[]): Promise<any> => {
+  	let response: any;
+  	try {
+    	if (params) {
+      		response = await MySQL.scalar(sql, params);
+    	} else {
+      		response = await MySQL.scalar(sql);
+    	}
+  	} catch (error) {
+    	console.error(error);
+    	response = [];
+  	}
+  	return JSON.stringify(response);
+};
