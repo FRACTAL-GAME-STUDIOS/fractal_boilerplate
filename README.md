@@ -13,29 +13,23 @@ npm i --force
 ```
 
 ## Usage
+Run the following commands for development and production:
 
-### Development
-
-To start development mode, run:
-
-```bash
-npm run watch
-```
-
-### Production
-
-To build a production version, run:
-
-```bash
-npm run build
-```
+- `npm run build:all`: Build web and TypeScript code.
+- `npm run build:web`: Build only the web application.
+- `npm run build:ts`: Build only the TypeScript code.
+- `npm run watch:all`: Watch for changes in web and TypeScript code.
+- `npm run watch:web`: Watch for changes in the web application.
+- `npm run watch:ts`: Watch for changes in the TypeScript code.
+- `npm run build`: Shortcut for `npm run build:all`.
+- `npm run watch`: Shortcut for `npm run watch:all`.
 
 ## Project Structure
 
 ### `typescript` Folder
 
-- `src/client`: Contains client-side scripts.
-  - `client.ts`: Entry point for the client.
+- `src/client`: Contains client-side codes.
+  - `client.ts`: Entry point for the client loader.
   - `controllers/index.ts`: Client controllers.
 
 - `src/core`: Contains the core logic of the project.
@@ -45,7 +39,7 @@ npm run build
 - `src/server`: Contains server-side scripts.
   - `server.ts`: Entry point for the server.
 
-- `src/web`: Contains the web application.
+- `src/web`: Contains the web application (Angular 15 - 16)
   - `app.component.html`: Main component of the web application.
 
 ### Configuration Files
